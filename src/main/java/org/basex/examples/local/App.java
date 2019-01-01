@@ -1,5 +1,6 @@
 package org.basex.examples.local;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ public final class App {
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private final Properties properties = new Properties();
 
-    public static void main(String[] args) throws BaseXException {
+    public static void main(String[] args) throws BaseXException, IOException {
         LOG.fine("starting..");
         java.util.List<String> stringList = new ArrayList<>();
         String string = "list";
@@ -27,8 +28,11 @@ public final class App {
         new App().foo(stringList);
     }
 
-    private void foo(java.util.List<String> StringList) throws BaseXException {
-        
+    private void foo(java.util.List<String> StringList) throws BaseXException, IOException {
+        Properties properties = new Properties();
+        properties.loadFromXML(App.class.getResourceAsStream("/selenium.xml"));
+        LOG.info(properties.toString());
+
         // Database context.
         Context context = new Context();
 
@@ -76,5 +80,4 @@ public final class App {
         context.close();
     }
 
-    
 }

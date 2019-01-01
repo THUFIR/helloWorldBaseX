@@ -1,0 +1,10 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>selenium config and vehicle type</comment>
+    <entry key="gecko">/home/thufir/.gecko/geckodriver</entry>
+    <entry key="url">http://books.toscrape.com/</entry>
+    <entry key="driver">webdriver.gecko.driver</entry>
+    <entry key="usr">admin</entry>
+    <entry key="pwd">12345</entry>
+    <entry key="option01">--headless</entry>
+</properties>
