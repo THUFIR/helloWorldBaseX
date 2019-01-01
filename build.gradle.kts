@@ -22,21 +22,28 @@ repositories {
    maven {
         setUrl("http://repo.spring.io/plugins-release/")
     }   
-  evolved {
-        setUrl("http://repo.evolvedbinary.com/content/repositories/exist-db/")
-    }
+  //evolved {
+ //       setUrl("http://repo.evolvedbinary.com/content/repositories/exist-db/")
+ //   }
 }
+
+
+
+// https://mvnrepository.com/artifact/net.sf.saxon/saxon-xqj
+
 
 
 
 dependencies {
     implementation("com.google.guava:guava:26.0-jre")
-    compile (group = "org.apache.xmlbeans"     , name = "xmlbeans"    , version= "2.6.0")
-    compile (group = "org.basex"               , name = "basex"       , version = "7.3.1")
-    compile (group = "javax.xml.xquery"        , name = "xqj-api"     , version = "1.0")
-    compile (group = "javax.xml.parsers"       , name = "jaxp-api"    , version= "1.4.5")
+  //  compile (group = "org.apache.xmlbeans"     , name = "xmlbeans"    , version = "2.6.0")
+  //  compile (group = "org.basex"               , name = "basex"       , version = "7.3.1")
+   // compile (group = "javax.xml.xquery"        , name = "xqj-api"     , version = "1.0")
+  //  compile (group = "javax.xml.parsers"       , name = "jaxp-api"    , version = "1.4.5")
+  //  compile (group = "net.sf.saxon"            , name = "saxon-xqj"     , version = "8.9")
+      compile (group = "net.sf.saxon"            , name = "saxon-HE"   , version = "9.9.0-2")
 
-
+//compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.9.0-2'
     // Use TestNG framework, also requires calling test.useTestNG() below
     testImplementation("org.testng:testng:6.14.3")
 }
