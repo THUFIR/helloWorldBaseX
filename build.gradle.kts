@@ -19,6 +19,9 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
+   maven {
+        setUrl("http://repo.spring.io/plugins-release/")
+    }
 }
 
 dependencies {
