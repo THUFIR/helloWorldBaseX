@@ -21,19 +21,21 @@ repositories {
     mavenCentral()
    maven {
         setUrl("http://repo.spring.io/plugins-release/")
+    }   
+  evolved {
+        setUrl("http://repo.evolvedbinary.com/content/repositories/exist-db/")
     }
 }
 
+
+
 dependencies {
-    // This dependency is found on compile classpath of this component and consumers.
     implementation("com.google.guava:guava:26.0-jre")
+    compile (group = "org.apache.xmlbeans"     , name = "xmlbeans"    , version= "2.6.0")
+    compile (group = "org.basex"               , name = "basex"       , version = "7.3.1")
+    compile (group = "javax.xml.xquery"        , name = "xqj-api"     , version = "1.0")
+    compile (group = "javax.xml.parsers"       , name = "jaxp-api"    , version= "1.4.5")
 
-// https://mvnrepository.com/artifact/org.basex/basex
-compile (group= "org.basex", name = "basex" , version = "7.3.1")
-
-compile (group = "javax.xml.xquery" , name = "xqj-api" , version = "1.0")
-
-       
 
     // Use TestNG framework, also requires calling test.useTestNG() below
     testImplementation("org.testng:testng:6.14.3")
