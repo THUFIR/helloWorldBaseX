@@ -36,7 +36,7 @@ compile (group= "org.basex", name = "basex" , version = "7.3.1")
 
 application {
     // Define the main class for the application
-    mainClassName = "helloWorldBaseX.App"
+    mainClassName = "org.basex.examples.local.App"
 }
 
 val test by tasks.getting(Test::class) {

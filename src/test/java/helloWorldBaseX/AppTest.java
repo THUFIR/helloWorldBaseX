@@ -3,6 +3,7 @@
  */
 package helloWorldBaseX;
 
+import org.basex.examples.local.App;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
 
