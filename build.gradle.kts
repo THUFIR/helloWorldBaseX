@@ -18,6 +18,7 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -27,7 +28,8 @@ dependencies {
 // https://mvnrepository.com/artifact/org.basex/basex
 compile (group= "org.basex", name = "basex" , version = "7.3.1")
 
-//compile (group= "org.seleniumhq.selenium", name = "selenium-java", version = "3.+" )
+compile (group = "javax.xml.xquery" , name = "xqj-api" , version = "1.0")
+
        
 
     // Use TestNG framework, also requires calling test.useTestNG() below

@@ -30,11 +30,20 @@ public final class App {
         String databasePath = properties.getProperty("databasePath");
 
         list();
-        new CreateDB(databaseName,databasePath).execute(context);
+        new CreateDB(databaseName, databasePath).execute(context);
         list();
         new DropDB(databaseName).execute(context);
         list();
 
     }
 
+    private void xqj() {
+  //      XQDataSource ds = new SaxonXQDataSource();
+    //    XQConnection conn = ds.getConnection();
+    //    XQPreparedExpression exp = conn.prepareExpression("doc('file:/some/file.xml')/child::node()");
+    //    XQResultSequence result = exp.executeQuery();
+     //   while (result.next()) {
+     //       System.out.println(result.getItemAsString(null));
+     //   }
+    }
 }
