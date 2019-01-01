@@ -41,7 +41,7 @@ dependencies {
    // compile (group = "javax.xml.xquery"        , name = "xqj-api"     , version = "1.0")
   //  compile (group = "javax.xml.parsers"       , name = "jaxp-api"    , version = "1.4.5")
   //  compile (group = "net.sf.saxon"            , name = "saxon-xqj"     , version = "8.9")
-   //   compile (group = "net.sf.saxon"            , name = "saxon-HE"   , version = "9.9.0-2")
+      compile (group = "net.sf.saxon"            , name = "saxon-HE"   , version = "9.9.0-2")
 
 //compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.9.0-2'
     // Use TestNG framework, also requires calling test.useTestNG() below
