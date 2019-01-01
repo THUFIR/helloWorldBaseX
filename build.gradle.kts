@@ -24,6 +24,12 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation("com.google.guava:guava:26.0-jre")
 
+// https://mvnrepository.com/artifact/org.basex/basex
+compile (group= "org.basex", name = "basex" , version = "7.3.1")
+
+//compile (group= "org.seleniumhq.selenium", name = "selenium-java", version = "3.+" )
+       
+
     // Use TestNG framework, also requires calling test.useTestNG() below
     testImplementation("org.testng:testng:6.14.3")
 }
