@@ -1,0 +1,6 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>selenium config and vehicle type</comment>
+    <entry key="databaseName">DBExample</entry>
+    <entry key="databasePath">src/main/resources/input.xml</entry>
+</properties>
