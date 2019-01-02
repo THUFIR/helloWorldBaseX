@@ -20,7 +20,7 @@ public final class App {
         Database database = new Database(properties);
         database.CreateFromScratch();
         database.tryDrop();
-        Scraper scraper = new ScraperForXML(properties);
+        Scraper scraper = new ScraperForHTML(properties);
         scraper.fetch();
     }
     
