@@ -16,8 +16,9 @@ public final class App {
 
     private void helloWorld() throws IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
-        LOG.info(properties.toString());
+        LOG.fine(properties.toString());
         Database database = new Database(properties);
-        database.CreateFromScratch("foo");
+        database.CreateFromScratch();
     }
+    
 }

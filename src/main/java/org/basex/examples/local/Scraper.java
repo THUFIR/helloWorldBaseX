@@ -20,11 +20,11 @@ public class Scraper {
 
     public Scraper(Properties properties) {
         this.properties = properties;
-        LOG.info(properties.toString());
+        LOG.fine(properties.toString());
     }
 
     private String fetch() throws MalformedURLException, IOException {
-        LOG.info(properties.toString());
+        LOG.fine(properties.toString());
 
         URL url = new URL(properties.getProperty("url"));
 

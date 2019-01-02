@@ -20,7 +20,7 @@ public class Database {
 
     public Database(Properties properties) {
         this.properties = properties;
-        LOG.info(properties.toString());
+        LOG.fine(properties.toString());
     }
 
     private void list() {
@@ -28,28 +28,25 @@ public class Database {
             LOG.info(new List().execute(context));
         } catch (BaseXException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
-            LOG.info("no databases");
+            LOG.fine("no databases");
         }
     }
 
-    public void CreateFromScratch(String html) {
+    public void CreateFromScratch() {
         String databaseName = properties.getProperty("databaseName");
         String databasePath = properties.getProperty("databasePath");
         String dataPath = properties.getProperty("dataPath");
-        LOG.info(databaseName);
-        LOG.info(databasePath);
 
         list();
         try {
             new DropDB(databaseName).execute(context);
         } catch (BaseXException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-            LOG.info("no databases to drop");
+            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+            LOG.fine("no databases to drop");
         }
         list();
         try {
-            // new CreateDB("DBExample", "src/main/resources/xml/input.xml").execute(context);
-            new CreateDB(databaseName, databasePath).execute(context);
+            new CreateDB(databaseName, dataPath).execute(context);
         } catch (BaseXException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
             LOG.severe("cannot create database");
