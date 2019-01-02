@@ -6,10 +6,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
+import org.basex.core.BaseXException;
+import org.basex.core.Context;
+import org.basex.core.Databases;
+import org.basex.core.cmd.CreateDB;
+import org.basex.core.cmd.List;
+import org.basex.core.cmd.Set;
+import org.basex.util.list.StringList;
 
-public class ScraperForHTML {
+public class ScraperForHTML implements Scraper{
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
@@ -22,23 +30,34 @@ public class ScraperForHTML {
         LOG.fine(properties.toString());
     }
 
-    private String fetch() throws MalformedURLException, IOException {
+    @Override
+    public void fetch() throws BaseXException, MalformedURLException   {
         URL url = new URL(properties.getProperty("htmlURL"));
+        String databaseName = properties.getProperty("databaseName");
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        String html = null;
+        Context context = new Context();
+        LOG.info(new List().execute(context));
+        
+        new Set("parser", "html").execute(context);
+        new CreateDB(databaseName, url.toString()).execute(context);
 
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
-            for (String line; (line = bufferedReader.readLine()) != null;) {
-                stringBuilder.append(line);
-                stringBuilder.append(System.getProperty("line.separator"));
-            }
+
+        Databases databases = context.databases();
+        StringList stringListOfDatabases = databases.listDBs();
+        String currentDatabaseName = null;
+
+        Iterator<String> databaseIterator = stringListOfDatabases.iterator();
+
+        while (databaseIterator.hasNext()) {
+            currentDatabaseName=databaseIterator.next();
+            LOG.info(currentDatabaseName);
+            //not quite sure how to query a database...
         }
-        html = stringBuilder.toString();
-        LOG.fine(html);
-        return html;
+
+
+      //  new DropDB(databaseName).execute(context);
+        context.close();
     }
+
 
 }

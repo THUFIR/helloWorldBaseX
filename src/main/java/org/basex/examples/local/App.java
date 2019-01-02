@@ -20,8 +20,8 @@ public final class App {
         Database database = new Database(properties);
         database.CreateFromScratch();
         database.tryDrop();
-        ScraperForXML sfx = new ScraperForXML(properties);
-        sfx.fetch();
+        Scraper scraper = new ScraperForXML(properties);
+        scraper.fetch();
     }
     
 }

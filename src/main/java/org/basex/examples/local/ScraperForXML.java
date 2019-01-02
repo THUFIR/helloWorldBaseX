@@ -9,12 +9,11 @@ import org.basex.core.BaseXException;
 import org.basex.core.Context;
 import org.basex.core.Databases;
 import org.basex.core.cmd.CreateDB;
-import org.basex.core.cmd.DropDB;
 import org.basex.core.cmd.List;
 import org.basex.core.cmd.Set;
 import org.basex.util.list.StringList;
 
-public class ScraperForXML {
+public class ScraperForXML implements Scraper{
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
@@ -27,6 +26,8 @@ public class ScraperForXML {
         LOG.fine(properties.toString());
     }
 
+
+    @Override
     public void fetch() throws BaseXException, MalformedURLException   {
         URL url = new URL(properties.getProperty("xmlURL"));
         String databaseName = properties.getProperty("databaseName");
@@ -51,7 +52,7 @@ public class ScraperForXML {
         }
 
 
-        new DropDB(databaseName).execute(context);
+      //  new DropDB(databaseName).execute(context);
         context.close();
     }
 
