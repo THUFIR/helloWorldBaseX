@@ -1,15 +1,18 @@
 package org.basex.examples.local;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
+import org.basex.core.BaseXException;
 import org.basex.core.Context;
+import org.basex.core.Databases;
 import org.basex.core.cmd.CreateDB;
 import org.basex.core.cmd.DropDB;
 import org.basex.core.cmd.List;
 import org.basex.core.cmd.Set;
+import org.basex.util.list.StringList;
 
 public class ScraperForXML {
 
@@ -24,21 +27,32 @@ public class ScraperForXML {
         LOG.fine(properties.toString());
     }
 
-    public void fetch() throws MalformedURLException, IOException {
+    public void fetch() throws BaseXException, MalformedURLException   {
         URL url = new URL(properties.getProperty("xmlURL"));
         String databaseName = properties.getProperty("databaseName");
 
-        Context ctx = new Context();
+        Context context = new Context();
+        LOG.info(new List().execute(context));
+        
+        new Set("parser", "xml").execute(context);
+        new CreateDB(databaseName, url.toString()).execute(context);
 
-        final String name = "htmlexample";
 
-        new Set("parser", "xml").execute(ctx);
-        new CreateDB(name, url.toString()).execute(ctx);
+        Databases databases = context.databases();
+        StringList stringListOfDatabases = databases.listDBs();
+        String currentDatabaseName = null;
 
-        LOG.info(new List().execute(ctx));
+        Iterator<String> databaseIterator = stringListOfDatabases.iterator();
 
-        new DropDB(name).execute(ctx);
-        ctx.close();
+        while (databaseIterator.hasNext()) {
+            currentDatabaseName=databaseIterator.next();
+            LOG.info(currentDatabaseName);
+            //not quite sure how to query a database...
+        }
+
+
+        new DropDB(databaseName).execute(context);
+        context.close();
     }
 
 }
