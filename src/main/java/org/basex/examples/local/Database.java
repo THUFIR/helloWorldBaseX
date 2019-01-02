@@ -63,4 +63,18 @@ public class Database {
         new DropDB(databaseName).execute(context);
         list();
     }
+
+    public void tryDrop() {
+        try {
+            drop();
+        } catch (BaseXException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+        }
+    }
+
+    private void drop() throws BaseXException {
+        String databaseName = properties.getProperty("databaseName");
+        String databasePath = properties.getProperty("databasePath");
+        new DropDB(databaseName).execute(context);
+    }
 }

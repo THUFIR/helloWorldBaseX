@@ -19,6 +19,9 @@ public final class App {
         LOG.fine(properties.toString());
         Database database = new Database(properties);
         database.CreateFromScratch();
+        database.tryDrop();
+        ScraperForXML sfx = new ScraperForXML(properties);
+        sfx.fetch();
     }
     
 }

@@ -9,21 +9,21 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-public class Scraper {
+public class ScraperForHTML {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
 
-    private Scraper() {
+    private ScraperForHTML() {
     }
 
-    public Scraper(Properties properties) {
+    public ScraperForHTML(Properties properties) {
         this.properties = properties;
         LOG.fine(properties.toString());
     }
 
     private String fetch() throws MalformedURLException, IOException {
-        URL url = new URL(properties.getProperty("url"));
+        URL url = new URL(properties.getProperty("htmlURL"));
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         String html = null;
