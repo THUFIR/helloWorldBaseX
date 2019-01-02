@@ -40,7 +40,7 @@ dependencies {
 
 
   //  compile (group = "org.apache.xmlbeans"     , name = "xmlbeans"    , version = "2.6.0")
-  //  compile (group = "org.basex"               , name = "basex"       , version = "7.3.1")
+    compile (group = "org.basex"               , name = "basex"       , version = "7.3.1")
    // compile (group = "javax.xml.xquery"        , name = "xqj-api"     , version = "1.0")
   //  compile (group = "javax.xml.parsers"       , name = "jaxp-api"    , version = "1.4.5")
   //  compile (group = "net.sf.saxon"            , name = "saxon-xqj"     , version = "8.9")
