@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Logger;
-import org.basex.core.Context;
 
 public class Scraper {
 
@@ -24,8 +23,6 @@ public class Scraper {
     }
 
     private String fetch() throws MalformedURLException, IOException {
-        LOG.fine(properties.toString());
-
         URL url = new URL(properties.getProperty("url"));
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
