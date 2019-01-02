@@ -20,7 +20,7 @@ public final class App {
     private final Context context = new Context();
     private URL url = null;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException   {
         LOG.fine("starting..");
         new App().helloWorld();
     }
@@ -39,19 +39,20 @@ public final class App {
         list();
     }
 
-    private void helloWorld() throws BaseXException, IOException {
+    private void helloWorld() throws IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
         url = new URL(properties.getProperty("url"));
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        int code = conn.getResponseCode();
-        LOG.info("connection code\t\t" + code);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-            for (String line; (line = br.readLine()) != null;) {
-                System.out.println(line);
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
+            for (String line; (line = bufferedReader.readLine()) != null;) {
+                stringBuilder.append(line);
+                stringBuilder.append(System.getProperty("line.separator"));
             }
         }
+        LOG.info(stringBuilder.toString());
     }
 }
