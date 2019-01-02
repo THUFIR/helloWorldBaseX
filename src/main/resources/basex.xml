@@ -4,4 +4,5 @@
     <entry key="url">http://books.toscrape.com/</entry>
     <entry key="databaseName">DBExample</entry>
     <entry key="databasePath">src/main/resources/input.xml</entry>
+    <entry key="dataPath">src/main/resources/data.xml</entry>
 </properties>

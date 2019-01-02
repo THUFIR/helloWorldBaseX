@@ -35,6 +35,7 @@ public class Database {
     public void CreateFromScratch(String html) {
         String databaseName = properties.getProperty("databaseName");
         String databasePath = properties.getProperty("databasePath");
+        String dataPath = properties.getProperty("dataPath");
         LOG.info(databaseName);
         LOG.info(databasePath);
 
