@@ -25,7 +25,7 @@ public class Fetcher {
         URL url = new URL(properties.getProperty("htmlURL"));
         String databaseName = properties.getProperty("databaseName");
         Context context = new Context();
-        LOG.info(new List().execute(context));
+        LOG.fine(new List().execute(context));
     }
 
 }

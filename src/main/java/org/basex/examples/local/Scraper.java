@@ -42,7 +42,7 @@ public class Scraper {
 
     private void list() {
         try {
-            LOG.info(new List().execute(context));
+            LOG.fine(new List().execute(context));
         } catch (BaseXException ex) {
             Logger.getLogger(Scraper.class.getName()).log(Level.FINE, null, ex);
         }
@@ -85,7 +85,7 @@ public class Scraper {
 
     private void query(final String query) {
         try {
-            LOG.info(new XQuery(query).execute(context));
+            LOG.fine(new XQuery(query).execute(context));
         } catch (BaseXException ex) {
             Logger.getLogger(Scraper.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -3,7 +3,7 @@
     <comment>xbase config</comment>
     <entry key="htmlURL">http://books.toscrape.com/</entry>
     <entry key="xmlURL">https://www.w3schools.com/xml/note.xml</entry>
-    <entry key="parserType">html</entry>
+    <entry key="parserType">xml</entry>
     <entry key="databaseName">w3school_data</entry>
     <entry key="databasePath">src/main/resources/input.xml</entry>
     <entry key="dataPath">src/main/resources/data.xml</entry>

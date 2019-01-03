@@ -21,7 +21,7 @@ public final class App {
     private void queryOnly() throws BaseXException, MalformedURLException {
         DatabaseQuery databaseQuery = new DatabaseQuery(properties);
         databaseQuery.init();
-        databaseQuery.runQuery(queryHTML); //ouch
+        databaseQuery.runQuery(queryXML); //ouch
     }
 
     private void populate() throws MalformedURLException {
