@@ -17,10 +17,10 @@ public final class App {
     private void helloWorld() throws IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
         LOG.fine(properties.toString());
-        MyDatabase database = new MyDatabase(properties);
-        database.CreateFromScratch();
-     //   Scraper s = new ScraperForHTML(properties);
-     //   s.fetch();
+
+        Scraper s = new ScraperForXML(properties);
+        s.init();
+        s.fetch();
     }
     
 }

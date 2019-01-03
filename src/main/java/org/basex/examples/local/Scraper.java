@@ -14,6 +14,7 @@ import org.basex.core.BaseXException;
  */
 public interface Scraper {
 
+    public void init() throws MalformedURLException;
     public void fetch() throws BaseXException, MalformedURLException;
 
 }

@@ -13,10 +13,13 @@ import org.basex.core.cmd.List;
 import org.basex.core.cmd.Set;
 import org.basex.util.list.StringList;
 
-public class ScraperForHTML implements Scraper{
+public class ScraperForHTML implements Scraper {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
+    private URL url = null;
+    private String databaseName = null;
+    private Context context;
 
     private ScraperForHTML() {
     }
@@ -26,17 +29,32 @@ public class ScraperForHTML implements Scraper{
         LOG.fine(properties.toString());
     }
 
-    @Override
-    public void fetch() throws BaseXException, MalformedURLException   {
-        URL url = new URL(properties.getProperty("htmlURL"));
-        String databaseName = properties.getProperty("databaseName");
+    public void init() throws MalformedURLException {
+        url = new URL(properties.getProperty("htmlURL"));
+        databaseName = properties.getProperty("databaseName");
+        context = new Context();
+    }
 
-        Context context = new Context();
+    private void list() throws BaseXException {
         LOG.info(new List().execute(context));
-        
-        new Set("parser", "html").execute(context);
-        new CreateDB(databaseName, url.toString()).execute(context);
+    }
 
+    private void drop() throws BaseXException {
+        list();
+        new Set("parser", "xml").execute(context);
+        new CreateDB(databaseName, url.toString()).execute(context);
+        list();
+    }
+
+    private void create() throws BaseXException {
+        list();
+        new Set("parser", "xml").execute(context);
+        new CreateDB(databaseName, url.toString()).execute(context);
+        LOG.info(new List().execute(context));
+        list();
+    }
+
+    private void infoOnDatabases() {
 
         Databases databases = context.databases();
         StringList stringListOfDatabases = databases.listDBs();
@@ -45,15 +63,18 @@ public class ScraperForHTML implements Scraper{
         Iterator<String> databaseIterator = stringListOfDatabases.iterator();
 
         while (databaseIterator.hasNext()) {
-            currentDatabaseName=databaseIterator.next();
+            currentDatabaseName = databaseIterator.next();
             LOG.info(currentDatabaseName);
             //not quite sure how to query a database...
         }
-
-
-      //  new DropDB(databaseName).execute(context);
-        context.close();
     }
 
+    @Override
+    public void fetch() throws BaseXException, MalformedURLException {
+        drop();
+        create();
+        list();
+        context.close();
+    }
 
 }

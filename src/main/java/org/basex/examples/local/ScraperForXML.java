@@ -17,6 +17,9 @@ public class ScraperForXML implements Scraper {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
+    private URL url = null;
+    private String databaseName = null;
+    private Context context;
 
     private ScraperForXML() {
     }
@@ -25,19 +28,34 @@ public class ScraperForXML implements Scraper {
         this.properties = properties;
         LOG.fine(properties.toString());
     }
-
+    
     @Override
-    public void fetch() throws BaseXException, MalformedURLException {
-        URL url = new URL(properties.getProperty("xmlURL"));
-        String databaseName = properties.getProperty("databaseName");
+    public void init() throws MalformedURLException {
+        url = new URL(properties.getProperty("xmlURL"));
+        databaseName = properties.getProperty("databaseName");
+        context = new Context();
+    }
 
-        Context context = new Context();
+    private void list() throws BaseXException {
         LOG.info(new List().execute(context));
+    }
 
+    private void drop() throws BaseXException {
+        list();
         new Set("parser", "xml").execute(context);
         new CreateDB(databaseName, url.toString()).execute(context);
+        list();
+    }
 
+    private void create() throws BaseXException {
+        list();
+        new Set("parser", "xml").execute(context);
+        new CreateDB(databaseName, url.toString()).execute(context);
         LOG.info(new List().execute(context));
+        list();
+    }
+
+    private void infoOnDatabases() {
 
         Databases databases = context.databases();
         StringList stringListOfDatabases = databases.listDBs();
@@ -50,8 +68,13 @@ public class ScraperForXML implements Scraper {
             LOG.info(currentDatabaseName);
             //not quite sure how to query a database...
         }
+    }
 
-        //  new DropDB(databaseName).execute(context);
+    @Override
+    public void fetch() throws BaseXException, MalformedURLException {
+        drop();
+        create();
+        list();
         context.close();
     }
 
