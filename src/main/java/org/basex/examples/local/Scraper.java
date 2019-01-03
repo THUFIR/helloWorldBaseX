@@ -9,6 +9,7 @@ import org.basex.core.BaseXException;
 import org.basex.core.Context;
 import org.basex.core.Databases;
 import org.basex.core.cmd.CreateDB;
+import org.basex.core.cmd.DropDB;
 import org.basex.core.cmd.List;
 import org.basex.core.cmd.Set;
 import org.basex.core.cmd.XQuery;
@@ -43,14 +44,12 @@ public class Scraper {
     }
 
     private void drop() throws BaseXException {
-        list();
         new Set("parser", parserType).execute(context);
-        new CreateDB(databaseName, url.toString()).execute(context);
+        new DropDB(databaseName).execute(context);
         list();
     }
 
     private void create() throws BaseXException {
-        list();
         new Set("parser", parserType).execute(context);
         new CreateDB(databaseName, url.toString()).execute(context);
         LOG.info(new List().execute(context));
