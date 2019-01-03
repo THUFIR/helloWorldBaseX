@@ -21,7 +21,7 @@ public final class App {
     private void queryOnly() throws BaseXException, MalformedURLException {
         DatabaseQuery databaseQuery = new DatabaseQuery(properties);
         databaseQuery.init();
-        databaseQuery.runQuery(queryXML); //ouch
+        databaseQuery.runQuery(queryHTML); //ouch
     }
 
     private void populate() throws MalformedURLException {
@@ -33,7 +33,7 @@ public final class App {
     private void helloWorld() throws BaseXException, MalformedURLException, IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
         LOG.fine(properties.toString());
-     //   populate();
+   //     populate();
         queryOnly();
     }
 
