@@ -3,7 +3,6 @@ package org.basex.examples.local;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.basex.core.BaseXException;
 
@@ -34,7 +33,7 @@ public final class App {
     private void helloWorld() throws BaseXException, MalformedURLException, IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
         LOG.fine(properties.toString());
-        populate();
+     //   populate();
         queryOnly();
     }
 
