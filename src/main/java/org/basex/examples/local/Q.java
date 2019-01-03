@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.basex.core.BaseXException;
 import org.basex.core.Context;
@@ -16,7 +15,7 @@ import org.basex.core.cmd.Set;
 import org.basex.core.cmd.XQuery;
 import org.basex.util.list.StringList;
 
-public class Scraper {
+public class Q {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
@@ -25,10 +24,10 @@ public class Scraper {
     private Context context = null;
     private String parserType = null;
 
-    private Scraper() {
+    private Q() {
     }
 
-    public Scraper(Properties properties) {
+    public Q(Properties properties) {
         this.properties = properties;
         LOG.fine(properties.toString());
     }
@@ -40,33 +39,8 @@ public class Scraper {
         context = new Context();
     }
 
-    private void list() {
-        try {
-            LOG.info(new List().execute(context));
-        } catch (BaseXException ex) {
-            Logger.getLogger(Scraper.class.getName()).log(Level.FINE, null, ex);
-        }
-    }
-
-    private void drop() {
-        try {
-            new Set("parser", parserType).execute(context);
-            new DropDB(databaseName).execute(context);
-        } catch (BaseXException ex) {
-            Logger.getLogger(Scraper.class.getName()).log(Level.INFO, null, ex);
-        }
-        list();
-    }
-
-    private void create() {
-        try {
-            new Set("parser", parserType).execute(context);
-            new CreateDB(databaseName, url.toString()).execute(context);
-            new List().execute(context);
-        } catch (BaseXException ex) {
-            Logger.getLogger(Scraper.class.getName()).log(Level.INFO, null, ex);
-        }
-        list();
+    private void list() throws BaseXException {
+        LOG.info(new List().execute(context));
     }
 
     private void infoOnDatabases() {
@@ -83,20 +57,13 @@ public class Scraper {
         }
     }
 
-    private void query(final String query) {
-        try {
-            LOG.info(new XQuery(query).execute(context));
-        } catch (BaseXException ex) {
-            Logger.getLogger(Scraper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void query(final String query) throws BaseXException {
+        LOG.info(new XQuery(query).execute(context));
     }
 
-    public void fetch() {
-        drop();
-        create();
+    public void openAndQuery() throws BaseXException, MalformedURLException {
         infoOnDatabases();
-        list();
-        query("//note/body/text()");
+        query("//div");
         context.close();
     }
 
