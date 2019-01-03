@@ -13,7 +13,7 @@ import org.basex.core.cmd.List;
 import org.basex.core.cmd.Set;
 import org.basex.util.list.StringList;
 
-public class ScraperForXML implements Scraper{
+public class ScraperForXML implements Scraper {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
@@ -26,18 +26,18 @@ public class ScraperForXML implements Scraper{
         LOG.fine(properties.toString());
     }
 
-
     @Override
-    public void fetch() throws BaseXException, MalformedURLException   {
+    public void fetch() throws BaseXException, MalformedURLException {
         URL url = new URL(properties.getProperty("xmlURL"));
         String databaseName = properties.getProperty("databaseName");
 
         Context context = new Context();
         LOG.info(new List().execute(context));
-        
+
         new Set("parser", "xml").execute(context);
         new CreateDB(databaseName, url.toString()).execute(context);
 
+        LOG.info(new List().execute(context));
 
         Databases databases = context.databases();
         StringList stringListOfDatabases = databases.listDBs();
@@ -46,13 +46,12 @@ public class ScraperForXML implements Scraper{
         Iterator<String> databaseIterator = stringListOfDatabases.iterator();
 
         while (databaseIterator.hasNext()) {
-            currentDatabaseName=databaseIterator.next();
+            currentDatabaseName = databaseIterator.next();
             LOG.info(currentDatabaseName);
             //not quite sure how to query a database...
         }
 
-
-      //  new DropDB(databaseName).execute(context);
+        //  new DropDB(databaseName).execute(context);
         context.close();
     }
 

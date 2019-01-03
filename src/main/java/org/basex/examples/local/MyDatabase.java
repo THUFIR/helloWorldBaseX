@@ -9,16 +9,16 @@ import org.basex.core.cmd.CreateDB;
 import org.basex.core.cmd.DropDB;
 import org.basex.core.cmd.List;
 
-public class Database {
+public class MyDatabase {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private Properties properties = new Properties();
     private final Context context = new Context();
 
-    private Database() {
+    private MyDatabase() {
     }
 
-    public Database(Properties properties) {
+    public MyDatabase(Properties properties) {
         this.properties = properties;
         LOG.fine(properties.toString());
     }
@@ -27,28 +27,27 @@ public class Database {
         try {
             LOG.info(new List().execute(context));
         } catch (BaseXException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.FINE, null, ex);
             LOG.info("no databases");
         }
     }
 
     public void CreateFromScratch() {
         String databaseName = properties.getProperty("databaseName");
-        String databasePath = properties.getProperty("databasePath");
         String dataPath = properties.getProperty("dataPath");
 
         list();
         try {
             new DropDB(databaseName).execute(context);
         } catch (BaseXException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.FINE, null, ex);
             LOG.fine("no databases to drop");
         }
         list();
         try {
             new CreateDB(databaseName, dataPath).execute(context);
         } catch (BaseXException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.FINE, null, ex);
             LOG.severe("cannot create database");
         }
         list();
@@ -68,7 +67,7 @@ public class Database {
         try {
             drop();
         } catch (BaseXException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
+            Logger.getLogger(MyDatabase.class.getName()).log(Level.FINE, null, ex);
         }
     }
 
