@@ -17,8 +17,7 @@ public final class App {
     private void helloWorld() throws IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/basex.xml"));
         LOG.fine(properties.toString());
-
-        Scraper s = new ScraperForXML(properties);
+        Scraper s = new Scraper(properties);
         s.init();
         s.fetch();
     }
