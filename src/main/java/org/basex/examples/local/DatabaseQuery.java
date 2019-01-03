@@ -35,12 +35,11 @@ public class DatabaseQuery {
         context = new Context();
     }
 
-    public void query() throws BaseXException {
+    public void runQuery(String query) throws BaseXException {
         new Open(databaseName).execute(context);
         LOG.info(new List().execute(context));
-        LOG.info(new XQuery("//note/body/text()").execute(context));
+        LOG.info(new XQuery(query).execute(context));
         context.close();
-
     }
 
 }

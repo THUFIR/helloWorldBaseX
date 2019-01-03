@@ -19,7 +19,7 @@ public final class App {
         LOG.fine(properties.toString());
         DatabaseQuery databaseQuery = new DatabaseQuery(properties);
         databaseQuery.init();
-        databaseQuery.query();
+        databaseQuery.runQuery("//note/body/text()");
     }
     
 }
