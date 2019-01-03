@@ -25,10 +25,10 @@ public class Database {
 
     private void list() {
         try {
-            LOG.fine(new List().execute(context));
+            LOG.info(new List().execute(context));
         } catch (BaseXException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.FINE, null, ex);
-            LOG.fine("no databases");
+            LOG.info("no databases");
         }
     }
 
